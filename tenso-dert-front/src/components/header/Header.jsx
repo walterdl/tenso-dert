@@ -80,11 +80,13 @@ class Header extends Component {
                   onlyEvent
                   onResize={this.setAffixPlaceholderHeight}
                 >
-                  <img
-                    onLoad={this.setAffixPlaceholderHeight}
-                    className="img-fluid"
-                    src={this.props.theme.logo}
-                    alt="Tenso Dert" />
+                  <Link to={ROUTES.home}>
+                    <img
+                      onLoad={this.setAffixPlaceholderHeight}
+                      className="img-fluid"
+                      src={this.props.theme.logo}
+                      alt="Tenso Dert" />
+                  </Link>
                 </ResizeAware>
               </div>
               <div className="col">
