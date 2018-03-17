@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "TensoDertBack",
+			"name": "TensoDert Backend"
+		},
+		{
+			"path": "tenso-dert-front",
+			"name": "TensoDert Frontend"
+		}
+	],
+	"settings": {}
+}

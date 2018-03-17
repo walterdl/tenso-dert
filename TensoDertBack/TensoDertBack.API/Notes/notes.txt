@@ -1,0 +1,51 @@
+1 categoria tiene muchos productos =
+producto = {
+ nombre
+ idCategoria
+}
+
+1 producto tiene muchos precios (por el cambio de la medida) =
+productoPrecio = {
+ valor
+ medida
+ idProducto
+}
+
+1 productoPrecio puede o no puede estar
+en stock o disponoble a la venta =
+stock = {
+ idProductoPrecio
+ enStock
+}
+* enStock es bool indicando si se encuentra el producto
+  cambia a false si salio del stock. Cada adicion o eliminacion
+  del stock debe registrarse como un movimiento
+
+cada movimiento del stock debe registrarse ya sea por
+corrección de cantidad ingresada, venta o almacenamiento =
+movimientos = {
+ fecha
+ razon
+ descripcion
+ idProductoPrecio
+}
+* razon es una lista de opciones
+* descripcion son detalles opcionales que ingresa el usuario
+* idProductoPrecio enlaza al productoPrecio que relaciona dicho
+  movimiento de inventario
+
+--------------
+producto = {
+ nombre
+ categoria
+ precio
+}
+
+categoria = {
+ nombre
+}
+
+precio = {
+ valor
+ medida
+}
