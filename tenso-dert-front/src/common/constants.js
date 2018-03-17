@@ -4,5 +4,6 @@ export const DOM_ELEMENTS_IDS = {
 
 export const ROUTES = {
   home: "/",
-  about: "/quienes-somos"
+  about: "/quienes-somos",
+  objectives: "/objetivos"
 }

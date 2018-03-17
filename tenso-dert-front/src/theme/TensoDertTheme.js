@@ -9,6 +9,9 @@ import materiasPrimasPicture from "theme/materias-primas.png"
 import about1Picture from "theme/about-1.png"
 import about2Picture from "theme/about-2.png"
 import about3Picture from "theme/about-3.png"
+import objective1Picture from "theme/objective-1.png"
+import objective2Picture from "theme/objective-2.png"
+import objective3Picture from "theme/objective-3.png"
 import { hexToRgbA } from "common/utils"
 
 const viewPortBreakPoints = {
@@ -47,19 +50,19 @@ const colors = {
 
 const texts = {
   titles1: `
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: bold;
   `,
   titles2: `
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
   `,
   titles3: `
-    font-size: 19px;
+    font-size: 1.1875rem;
     font-weight: normal;
   `,
   parragraphs: `
-    font-size: 1&px;
+    font-size: 1.125rem;
     font-weight: normal;
   `
 }
@@ -126,6 +129,9 @@ const tensoDertTheme = {
   about1Picture,
   about2Picture,
   about3Picture,
+  objective1Picture,
+  objective2Picture,
+  objective3Picture,
   getBreakpoint,
   getBaseButtonStyle,
   viewPortBreakPoints

@@ -1,10 +1,10 @@
 // 3rd
 import React from "react"
-import {withTheme} from "styled-components"
-import {Link} from "react-router-dom"
+import { withTheme } from "styled-components"
+import { Link } from "react-router-dom"
 
 // Own
-import {ROUTES} from "common/constants"
+import { ROUTES } from "common/constants"
 
 const AboutUs = props => {
   return (
@@ -42,7 +42,7 @@ const AboutUs = props => {
           src={props.theme.about3Picture}
           alt="About" />
         <p>Mediante la actualización tecnológica y la diversificación de sus productos en el mercado con excelentes estándares de calidad</p>
-        <p><Link to={ROUTES.home}>Ver más...</Link></p>
+        <p><Link to={ROUTES.objectives}>Ver más...</Link></p>
         <div className="cleaner" />
       </div>
     </div>

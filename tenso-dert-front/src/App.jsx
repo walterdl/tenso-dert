@@ -12,6 +12,7 @@ import ChangeLocationDetector from "components/changeLocationDetector/ChangeLoca
 import Header from "components/header/Header.Styled"
 import Home from "components/home/Home.Styled"
 import AboutUs from "components/aboutUs/AboutUs.Styled"
+import Objectives from "components/objectives/Objectives.Styled"
 import Footer from "components/footer/Footer.Styled"
 
 class App extends Component {
@@ -40,6 +41,7 @@ class App extends Component {
               <Switch>
                 <Route exact path={ROUTES.home} component={Home}/>
                 <Route exact path={ROUTES.about} component={AboutUs}/>
+                <Route exact path={ROUTES.objectives} component={Objectives}/>
               </Switch>
             </ChangeLocationDetector>
             <Footer />
