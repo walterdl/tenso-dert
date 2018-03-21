@@ -19,10 +19,6 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      appContainerMarginTop: 0
-    }
-
     this.handleLocationChange = this.handleLocationChange.bind(this)
   }
 
