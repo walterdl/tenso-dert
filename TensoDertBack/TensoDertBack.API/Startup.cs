@@ -9,40 +9,51 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TensoDertBack.Interfaces;
-using TensoDertBack.API.Infrastructure;
 using Microsoft.AspNetCore.Http;
+
+// Own
+using TensoDertBack.Interfaces;
+using TensoDertBack.Interfaces.Repository;
+using TensoDertBack.API.Infrastructure;
+using TensoDertBack.EFRepository;
 
 namespace TensoDertBack.API
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            // services.AddDbContext<MotelsContext>(options =>
-            //        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IResponsePreparer, ResponsePreparer>();
-            services.AddMvc();
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        }
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			// TODO
+			// Define if the order here is important
+			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			services.AddTransient<IJsonResponsePreparer, JsonResponsePreparer>();
+			services.AddTransient<IRepositoryWork, EFRepositoryWork>(provider => {
+				// Get connection string from appsettings.json here
+				return new EFRepositoryWork(Configuration.GetConnectionString("SQLServerDB"));
+			});
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+			services.AddMvc();
+		}
 
-            app.UseMvc();
-        }
-    }
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		{
+			// Leaved here for reference purposes
+			// if (env.IsDevelopment())
+			// {
+			//     app.UseDeveloperExceptionPage();
+			// }
+
+			app.UseMiddleware<ExceptionHandlerMiddleware>();
+			app.UseMvc();
+		}
+	}
 }

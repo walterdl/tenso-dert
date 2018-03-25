@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace TensoDertBack.Entities
 {
@@ -6,6 +6,8 @@ namespace TensoDertBack.Entities
     {
         public int Id { get; set; }
 
-        public string nombre { get; set; }
+        public string Name { get; set; }
+
+		public ICollection<Product> Products { get; set; }
     }
 }

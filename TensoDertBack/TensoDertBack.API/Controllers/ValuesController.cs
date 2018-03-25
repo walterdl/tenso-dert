@@ -20,7 +20,7 @@ namespace TensoDertBack.API.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            throw new Exception("Hi there Exception!");
         }
 
         // POST api/values

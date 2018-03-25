@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TensoDertBack.Interfaces\TensoDertBack.Interfaces.csproj" />
+	<ProjectReference Include="..\TensoDertBack.EFRepository\TensoDertBack.EFRepository.csproj" />
   </ItemGroup>
 
 </Project>
