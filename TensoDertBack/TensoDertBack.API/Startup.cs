@@ -38,7 +38,7 @@ namespace TensoDertBack.API
 			services.AddTransient<IJsonResponsePreparer, JsonResponsePreparer>();
 			services.AddTransient<IRepositoryWork, EFRepositoryWork>(provider => {
 				// Get connection string from appsettings.json here
-				// return new EFRepositoryWork(Configuration.GetConnectionString("SQLServerDB"));
+
 				return new EFRepositoryWork(
 					new SettingsProvider().GetConnectionString(ConnectionStrings.Default)
 				);

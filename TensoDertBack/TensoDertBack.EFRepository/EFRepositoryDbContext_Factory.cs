@@ -10,7 +10,7 @@ namespace TensoDertBack.EFRepository
 	{
 		public EFRepositoryDbContext CreateDbContext(string[] args)
 		{
-			return new EFRepositoryDbContext(new SettingsProvider().GetConnectionString(ConnectionStrings.SQLServer));
+			return new EFRepositoryDbContext(new SettingsProvider().GetConnectionString(ConnectionStrings.Default));
 		}
 	}
 }

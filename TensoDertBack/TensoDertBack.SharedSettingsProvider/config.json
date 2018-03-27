@@ -1,6 +1,6 @@
 {
 	"ConnectionStrings": {
-	  "Default": "SQLServerDB",
-	  "SQLServerDB": "Data Source=LUZ-HP-NOTEBOOK;Initial Catalog=test;Persist Security Info=True;User ID=development;Password=development"
+	  "Default": "SQLServer",
+	  "SQLServer": "Data Source=LUZ-HP-NOTEBOOK;Initial Catalog=TensoDert;Persist Security Info=True;User ID=development;Password=development"
 	}
 }

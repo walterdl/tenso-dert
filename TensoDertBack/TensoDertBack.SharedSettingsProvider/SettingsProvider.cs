@@ -1,7 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace TensoDertBack.SharedSettingsProvider
 {
@@ -10,54 +14,78 @@ namespace TensoDertBack.SharedSettingsProvider
 	public class SettingsProvider
 	{
 		IConfigurationBuilder configurationBuilder;
+		ILogger logger;
 
 		public SettingsProvider()
 		{
-			// .SetBasePath(Directory.GetCurrentDirectory())
+			ILoggerFactory loggerFactory = new LoggerFactory()
+				.AddConsole()
+				.AddDebug();
+
+			logger = loggerFactory.CreateLogger<SettingsProvider>();
+
 			configurationBuilder = new ConfigurationBuilder().AddJsonFile("config.json");
 		}
 
 		public string GetConnectionString(ConnectionStrings connectionString)
 		{
 			IConfiguration configuration = configurationBuilder.Build();
-			string connectionStringName;
+			IConfigurationSection connStringsSection = configuration.GetSection("ConnectionStrings");
+
+			if (!connStringsSection.Exists())
+			{
+				throw new InvalidDataException("config.json hasn't a ConnectionStrings section");
+			}
+
+			IEnumerable<IConfigurationSection> connStringChildren = connStringsSection.GetChildren();
+
+			if (connStringChildren.Count() == 0)
+			{
+				throw new InvalidDataException("ConnectionStrings in config.json is empty");
+			}
+
+			string connectionStringValue = null;
 
 			switch(connectionString)
 			{
 				case ConnectionStrings.Default:
-					connectionStringName = configuration.GetConnectionString(
-						Enum.GetName(typeof(ConnectionStrings), (int)ConnectionStrings.Default)
+					string defaultConnectionStringName = configuration.GetConnectionString(
+						Enum.GetName(typeof(ConnectionStrings), ConnectionStrings.Default)
 					);
+
+					if (defaultConnectionStringName is string)
+					{
+						connectionStringValue = configuration.GetConnectionString(defaultConnectionStringName);
+					}
 					break;
 
 				case ConnectionStrings.SQLServer:
-					connectionStringName = configuration.GetConnectionString(
-						Enum.GetName(typeof(ConnectionStrings), (int)ConnectionStrings.SQLServer)
+					connectionStringValue = configuration.GetConnectionString(
+						Enum.GetName(typeof(ConnectionStrings), ConnectionStrings.SQLServer)
 					);
 					break;
 
 				// Leaved here as an example
 				case ConnectionStrings.MySQL:
-					connectionStringName = configuration.GetConnectionString(
-						Enum.GetName(typeof(ConnectionStrings), (int)ConnectionStrings.MySQL)
+					connectionStringValue = configuration.GetConnectionString(
+						Enum.GetName(typeof(ConnectionStrings), ConnectionStrings.MySQL)
 					);
 					break;
 
 				default:
-					connectionStringName = null;
+					connectionStringValue = null;
 					break;
 			}
 
-			if (connectionStringName == null)
+			if (connectionStringValue == null)
 			{
-				throw new ArgumentException("The argument given is null.", nameof(connectionString));
+				throw new ArgumentException("The connection string is not specified in config.json, the argument given is null or isn't a single value.",
+					nameof(connectionString));
 			}
 
-			string connectionStringValue = configuration.GetConnectionString(connectionStringName);
-
-			if (connectionStringValue == null || connectionStringValue.Trim().Length == 0)
+			if (connectionStringValue.Trim().Length == 0)
 			{
-				throw new ArgumentException("The connection string is not specified in config.json");
+				throw new ArgumentException($"The connection string with name {connectionString} is empty");
 			}
 
 			return connectionStringValue;
