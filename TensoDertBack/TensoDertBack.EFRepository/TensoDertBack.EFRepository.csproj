@@ -18,6 +18,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\TensoDertBack.Entities\TensoDertBack.Entities.csproj" />
 		<ProjectReference Include="..\TensoDertBack.Interfaces\TensoDertBack.Interfaces.csproj" />
+		<ProjectReference Include="..\TensoDertBack.SharedSettingsProvider\TensoDertBack.SharedSettingsProvider.csproj" />
 	</ItemGroup>
 
 </Project>

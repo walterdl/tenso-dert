@@ -15,15 +15,19 @@ namespace TensoDertBack.EFRepository
 		{
 			get
 			{
-				return connectionString;
+				return this.connectionString;
 			}
 		}
 
 		public DbSet<ProductCategory> ProductsCategories { get; set; }
+		public DbSet<Product> Products { get; set; }
+		public DbSet<ProductPrice> ProductPrices { get; set; }
 
 		// Leaved here for reference
 		// public EFRepositoryDbContext(DbContextOptions<EFRepositoryDbContext> options) : base(options)
 		// { }
+
+		internal EFRepositoryDbContext() : base() {}
 
 		internal EFRepositoryDbContext(string connectionString)
 		{

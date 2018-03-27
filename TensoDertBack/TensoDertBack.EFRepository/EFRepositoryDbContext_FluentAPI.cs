@@ -31,8 +31,6 @@ namespace TensoDertBack.EFRepository
 				buildAction.HasOne(p => p.Product).WithMany(c => c.ProductPrices)
 					.HasForeignKey(p => p.ProductId).IsRequired();
 			});
-
-			// modelBuilder.Entity<Stock>
 		}
 	}
 }
