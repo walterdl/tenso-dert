@@ -6,14 +6,9 @@ using TensoDertBack.Entities;
 
 namespace TensoDertBack.Interfaces.Repository
 {
-	public interface IProductsRepository
+	public interface IProductsRepository : IBasicRepository<IProduct>
 	{
-		Product Get(int Id);
-
-		Task<Product> GetAsync(int Id);
-
-		IEnumerable<Product> GetSet();
-
-		Task<IEnumerable<Product>> GetSetAsync();
+		// Specialized members for IProductsRepository pending
+		IProduct Create(string Name, IProductCategory ProductCategory);
 	}
 }

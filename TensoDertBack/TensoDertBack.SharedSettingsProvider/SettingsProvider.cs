@@ -24,7 +24,8 @@ namespace TensoDertBack.SharedSettingsProvider
 
 			logger = loggerFactory.CreateLogger<SettingsProvider>();
 
-			configurationBuilder = new ConfigurationBuilder().AddJsonFile("config.json");
+			configurationBuilder = new ConfigurationBuilder().AddJsonFile(
+				"SharedSettingsProvider.SourceFiles/ConnectionStrings.json");
 		}
 
 		public string GetConnectionString(ConnectionStrings connectionString)

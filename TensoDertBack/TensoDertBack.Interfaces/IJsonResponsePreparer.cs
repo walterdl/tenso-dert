@@ -5,6 +5,12 @@ namespace TensoDertBack.Interfaces
 {
 	public interface IJsonResponsePreparer
 	{
+		IActionResult Success();
+
+		IActionResult Success(string message);
+
+		IActionResult Success(object content);
+
 		IActionResult Success(string message, object content = null);
 
 		IActionResult NotFound(string message, object content = null);

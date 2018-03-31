@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 // Own
-using TensoDertBack.Entities;
+// using TensoDertBack.Entities;
+using TensoDertBack.EFRepository.Entities;
 
 namespace TensoDertBack.EFRepository
 {
@@ -19,16 +21,20 @@ namespace TensoDertBack.EFRepository
 				buildAction.HasKey(p => p.Id);
 				buildAction.Property(p => p.Id).UseSqlServerIdentityColumn();
 				buildAction.Property(p => p.Name).IsRequired().HasMaxLength(250);
-				buildAction.HasOne(p => p.ProductCategory).WithMany(c => c.Products)
+				buildAction.HasOne(p => (ProductCategory)p.ProductCategory)
+					.WithMany(c => (ICollection<Product>)c.Products)
 					.HasForeignKey(p => p.ProductCategoryId).IsRequired();
 			});
 
 			modelBuilder.Entity<ProductPrice>(buildAction => {
 				buildAction.HasKey(p => p.Id);
 				buildAction.Property(p => p.Id).UseSqlServerIdentityColumn();
-				buildAction.Property(p => p.MeasurementUnit).IsRequired();
+				buildAction.Ignore(p => p.MeasurementUnit);
+				buildAction.Property(p => p.measurementUnit)
+					.IsRequired().HasColumnName("MeasurementUnit");
 				buildAction.Property(p => p.Price).IsRequired();
-				buildAction.HasOne(p => p.Product).WithMany(c => c.ProductPrices)
+				buildAction.HasOne(p => (Product)p.Product)
+					.WithMany(c => (ICollection<ProductPrice>)c.ProductPrices)
 					.HasForeignKey(p => p.ProductId).IsRequired();
 			});
 		}

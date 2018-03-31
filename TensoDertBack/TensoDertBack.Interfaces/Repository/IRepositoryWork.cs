@@ -10,6 +10,12 @@ namespace TensoDertBack.Interfaces.Repository
 	{
 		IProductsRepository ProductsRepository{ get; }
 
+		IProductsCategoiesRepository ProductsCategoiesRepository { get; }
+
+		IProductsPricesRepository ProductsPricesRepository { get; }
+
+		void PrepareRepository();
+
 		int Complete();
 
 		Task<int> CompleteAsync();

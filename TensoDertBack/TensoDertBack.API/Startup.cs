@@ -38,7 +38,6 @@ namespace TensoDertBack.API
 			services.AddTransient<IJsonResponsePreparer, JsonResponsePreparer>();
 			services.AddTransient<IRepositoryWork, EFRepositoryWork>(provider => {
 				// Get connection string from appsettings.json here
-
 				return new EFRepositoryWork(
 					new SettingsProvider().GetConnectionString(ConnectionStrings.Default)
 				);
@@ -48,7 +47,7 @@ namespace TensoDertBack.API
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IRepositoryWork repositoryWork)
 		{
 			// Leaved here for reference purposes
 			// if (env.IsDevelopment())
@@ -58,6 +57,7 @@ namespace TensoDertBack.API
 
 			app.UseMiddleware<ExceptionHandlerMiddleware>();
 			app.UseMvc();
+			repositoryWork.PrepareRepository();
 		}
 	}
 }

@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+	<ConnectionStringsLocation>SharedSettingsProvider.SourceFiles/ConnectionStrings.json</ConnectionStringsLocation>
   </PropertyGroup>
 
 
 <ItemGroup>
-  <Content Include="config.json">
+  <Content Include="$(ConnectionStringsLocation)">
     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	<PublishState>Prerequisite</PublishState>
   </Content>
 </ItemGroup>
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 
 // Own
-using TensoDertBack.Entities;
+using TensoDertBack.EFRepository.Entities;
 
 namespace TensoDertBack.EFRepository
 {
@@ -15,7 +15,7 @@ namespace TensoDertBack.EFRepository
 		{
 			get
 			{
-				return this.connectionString;
+				return connectionString;
 			}
 		}
 

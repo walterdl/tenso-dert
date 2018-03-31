@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 // Own
 using TensoDertBack.Interfaces.Repository;
@@ -7,10 +8,12 @@ using TensoDertBack.SharedSettingsProvider;
 
 namespace TensoDertBack.EFRepository
 {
-	public class EFRepositoryWork : IRepositoryWork
+	public partial class EFRepositoryWork : IRepositoryWork
 	{
 		EFRepositoryDbContext dbContext;
 		IProductsRepository productsRepository;
+		IProductsCategoiesRepository productsCategoiesRepository;
+		IProductsPricesRepository productsPricesRepository;
 
 		public EFRepositoryWork()
 		{
@@ -34,6 +37,8 @@ namespace TensoDertBack.EFRepository
 
 			dbContext = new EFRepositoryDbContext(connectionString);
 			productsRepository = new ProductsRepository(dbContext);
+			productsCategoiesRepository = new ProductsCategoriesRepository(dbContext);
+			productsPricesRepository = new ProductsPricesRepository(dbContext);
 		}
 
 		public EFRepositoryDbContext GetDbContext
@@ -49,6 +54,22 @@ namespace TensoDertBack.EFRepository
 			get
 			{
 				return productsRepository;
+			}
+		}
+
+		public IProductsCategoiesRepository ProductsCategoiesRepository
+		{
+			get
+			{
+				return productsCategoiesRepository;
+			}
+		}
+
+		public IProductsPricesRepository ProductsPricesRepository
+		{
+			get
+			{
+				return productsPricesRepository;
 			}
 		}
 
