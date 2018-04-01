@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 // Own
 using TensoDertBack.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Serialization;
 
 namespace TensoDertBack.API.Infrastructure
 {
@@ -96,7 +97,13 @@ namespace TensoDertBack.API.Infrastructure
 				content
 			};
 
-			return JsonConvert.SerializeObject(response);
+			return JsonConvert.SerializeObject(
+				response,
+				Formatting.Indented,
+				new JsonSerializerSettings
+				{
+					ContractResolver = new CamelCasePropertyNamesContractResolver()
+				});
 		}
 	}
 }

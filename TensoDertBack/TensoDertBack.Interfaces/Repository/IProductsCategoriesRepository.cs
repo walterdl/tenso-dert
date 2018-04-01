@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,5 +11,7 @@ namespace TensoDertBack.Interfaces.Repository
 	{
 		// Specialized members for IProductsCategoiesRepository pending
 		IProductCategory Create(string Name, ICollection<IProduct> Products = null);
+
+		Task<ICollection<IProductCategory>> GetSetAsync(Func<IProductCategory, bool> filter);
 	}
 }

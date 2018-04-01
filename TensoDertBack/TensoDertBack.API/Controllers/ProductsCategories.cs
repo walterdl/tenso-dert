@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -27,13 +28,10 @@ namespace TensoDertBack.API
 
 		[HttpGet("")]
 		[HttpGet("get-all")]
-		public IActionResult GetAll()
+		public async Task<IActionResult> GetAllAsync()
 		{
-			logger.LogDebug("Testing logging in GetAll()");
-			return responsePreparer.Success("Hello there from GetAll");
-
-			// TODO
-			// implement here using Repository
+			var productsCategories = await repositoryWork.ProductsCategoiesRepository.GetSetAsync();
+			return responsePreparer.Success(productsCategories);
 		}
 	}
 }

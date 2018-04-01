@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -40,6 +41,12 @@ namespace TensoDertBack.EFRepository
 		{
 			var productsCategories = await dbContext.ProductsCategories.ToListAsync();
 			return productsCategories.Select(p => p as IProductCategory).ToList();
+		}
+
+		public async Task<ICollection<IProductCategory>> GetSetAsync(Func<IProductCategory, bool> filter)
+		{
+			var productsCategories = await dbContext.ProductsCategories.ToListAsync();
+			return productsCategories.Where(filter).Select(p => p as IProductCategory).ToList();
 		}
 
 		public void Add(IProductCategory productCategory)
