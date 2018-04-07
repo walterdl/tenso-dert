@@ -11,7 +11,6 @@ import FadePreloader from "fade-preloader"
 import TensoDertTheme from "theme/TensoDertTheme"
 import { DOM_ELEMENTS_IDS, ROUTES } from "common/constants"
 import ChangeLocationDetector from "components/changeLocationDetector/ChangeLocationDetector"
-// import AppPreloader from "appPreloader/AppPreloader.Styled"
 import Header from "components/header/Header.Styled"
 import Home from "components/home/Home.Styled"
 import AboutUs from "components/aboutUs/AboutUs.Styled"
@@ -72,8 +71,10 @@ class App extends Component {
       <BrowserRouter>
         <ThemeProvider theme={TensoDertTheme}>
           <div id={DOM_ELEMENTS_IDS.MAIN_ASSEMBLY_NODE}>
-            {/* <AppPreloader show={shouldShowAppPreloader} showInmediatly /> */}
-            <FadePreloader show={shouldShowAppPreloader} showInmediatly />
+            <FadePreloader
+              show={shouldShowAppPreloader}
+              showInmediatly
+              imageUrl={TensoDertTheme.logo} />
             <Header />
             <ChangeLocationDetector
               onLocationChange={this.handleLocationChange}>
