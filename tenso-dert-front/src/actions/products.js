@@ -26,15 +26,17 @@ const successProductsCategories = (categories) => {
   }
 }
 
-export function getProductsCategories(dispatch) {
-  dispatch(_getProductsCategories())
+export function getProductsCategories() {
+  return dispatch => {
+    dispatch(_getProductsCategories())
 
-  return fetch(`${API_ROOT}products/categories`)
-    .then(response => response.json(),
-      error => Promise.reject(error))
-    .then(json => {
-      dispatch(successProductsCategories(json))
-    }, error => {
-      dispatch(errorProductsCategories(error))
-    })
+    return fetch(`${API_ROOT}products-categories`)
+      .then(response => response.json(),
+        error => Promise.reject(error))
+      .then(json => {
+        dispatch(successProductsCategories(json))
+      }, error => {
+        dispatch(errorProductsCategories(error))
+      })
+  }
 }

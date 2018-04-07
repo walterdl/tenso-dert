@@ -31,6 +31,8 @@ namespace TensoDertBack.API
 		public async Task<IActionResult> GetAllAsync()
 		{
 			var productsCategories = await repositoryWork.ProductsCategoiesRepository.GetSetAsync();
+			// Intentional timeout
+			// await Task.Delay(5000);
 			return responsePreparer.Success(productsCategories);
 		}
 	}

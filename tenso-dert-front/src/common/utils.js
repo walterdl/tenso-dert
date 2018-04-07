@@ -11,3 +11,43 @@ export function hexToRgbA (hex, opacity = 1) {
 
   throw new Error("Bad Hex")
 }
+
+export function getTransitionEndEventName() {
+  var t, el = document.createElement("fakeelement")
+
+  var transitions = {
+    "transition": "transitionend",
+    "OTransition": "oTransitionEnd",
+    "MozTransition": "transitionend",
+    "WebkitTransition": "webkitTransitionEnd"
+  }
+
+  var transitionSelected = false
+
+  for (t in transitions){
+    if (el.style[t] !== undefined){
+      transitionSelected = transitions[t]
+    }
+  }
+
+  return transitionSelected
+}
+
+export function addClassName(element, className) {
+  var classes = element.className.split(" ")
+
+  if (classes.indexOf(className) === -1) {
+    element.className = element.className + " " + className
+  }
+}
+
+export function removeClassName(element, className) {
+  var classes = element.className.split(" ")
+
+  let classNameIndex = classes.indexOf(className)
+
+  if (classNameIndex !== -1) {
+    classes.splice(classNameIndex, 1)
+    element.className = classes.join(" ")
+  }
+}
